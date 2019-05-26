@@ -578,6 +578,8 @@
     <Content Include="images\app.png" />
     <Content Include="images\application.png" />
     <Content Include="images\bg1.jpg" />
+    <Content Include="images\DocImg\logMonitorImg.jpg" />
+    <Content Include="images\DocImg\logTraaceImg.jpg" />
     <Content Include="images\Kalimba.mp3" />
     <Content Include="images\server.png" />
     <Content Include="images\user-img-background.jpg" />
