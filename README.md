@@ -9,7 +9,7 @@ LgWG.LogQuery为日志查询网站，它查询日志数据库的数据(Log2Net�
 
 2 日志查询
 
-日志查询主要用于按照系统名称、服务器名称、时段、日志类型、关键词等条件查询操作轨迹类数据，主要以列表数据的形式展示日志数据。在列表的左侧，可以显示服务器的概况，如cpu使用率，内存使用率等。在列表的上侧，显示日志的分类汇总情况。
+日志查询主要用于按照系统名称、服务器名称、时段、日志类型、关键词等条件查询操作轨迹类数据，主要以列表数据的形式展示日志数据。在列表的左侧，可以显示服务器的概况，如cpu使用率，内存使用率等。在列表的上侧，显示日志的分类汇总情况。如下图所示：
 
 ![](https://github.com/yuchen1030/Log2Net-LgWG.LogQuery/blob/master/LgWG.LogQuery.Web/images/DocImg/logTraaceImg.jpg)
 
@@ -18,8 +18,6 @@ LgWG.LogQuery为日志查询网站，它查询日志数据库的数据(Log2Net�
 
 系统监控主要监控各服务器和应用网站的情况，主要以图形化的方面实时显示网站/服务器的运行情况。
 
-![](https://github.com/yuchen1030/Log2Net-LgWG.LogQuery/blob/master/LgWG.LogQuery.Web/images/DocImg/logMonitorImg.jpg)
-
 (1)、概况实时显示：显示服务器在当前时刻的cpu/内存使用率等情况；
 
 (2)、服务器状态监控：显示服务器在某时段内的cpu/内存使用率等情况；
@@ -27,3 +25,8 @@ LgWG.LogQuery为日志查询网站，它查询日志数据库的数据(Log2Net�
 (3)、系统流量监控：显示系统在某时段内的在线人数、某页面的访问人数等；
 
 (4)、异常告警：在系统新加入监控或失去监控时音乐告警。
+
+如下图所示：
+
+![](https://github.com/yuchen1030/Log2Net-LgWG.LogQuery/blob/master/LgWG.LogQuery.Web/images/DocImg/logMonitorImg.jpg)
+
