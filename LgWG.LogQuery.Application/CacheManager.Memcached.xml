@@ -1,0 +1,277 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CacheManager.Memcached</name>
+    </assembly>
+    <members>
+        <member name="T:CacheManager.Memcached.MemcachedCacheHandle`1">
+            <summary>
+            Cache handle implementation based on the Enyim memcached client.
+            </summary>
+            <typeparam name="TCacheValue">The type of the cache value.</typeparam>
+        </member>
+        <member name="M:CacheManager.Memcached.MemcachedCacheHandle`1.#ctor(CacheManager.Core.ICacheManagerConfiguration,CacheManager.Core.CacheHandleConfiguration,CacheManager.Core.Logging.ILoggerFactory,CacheManager.Core.Internal.ICacheSerializer)">
+            <summary>
+            Initializes a new instance of the <see cref="T:CacheManager.Memcached.MemcachedCacheHandle`1"/> class.
+            </summary>
+            <param name="managerConfiguration">The manager configuration.</param>
+            <param name="configuration">The cache handle configuration.</param>
+            <param name="loggerFactory">The logger factory.</param>
+            <param name="serializer">The serializer.</param>
+            <exception cref="T:System.ArgumentNullException">
+            If <paramref name="configuration"/> or <paramref name="loggerFactory"/> is null.
+            </exception>
+            <exception cref="T:System.InvalidOperationException">
+            The cache value type is not serializable or if the enyim configuration section could not
+            be initialized.
+            </exception>
+        </member>
+        <member name="M:CacheManager.Memcached.MemcachedCacheHandle`1.#ctor(CacheManager.Core.ICacheManagerConfiguration,CacheManager.Core.CacheHandleConfiguration,CacheManager.Core.Logging.ILoggerFactory,CacheManager.Core.Internal.ICacheSerializer,Enyim.Caching.MemcachedClient)">
+            <summary>
+            Initializes a new instance of the <see cref="T:CacheManager.Memcached.MemcachedCacheHandle`1"/> class.
+            </summary>
+            <param name="managerConfiguration">The manager configuration.</param>
+            <param name="configuration">The cache handle configuration.</param>
+            <param name="loggerFactory">The logger factory.</param>
+            <param name="serializer">The serializer.</param>
+            <param name="client">The <see cref="T:Enyim.Caching.MemcachedClient"/> to use.</param>
+        </member>
+        <member name="M:CacheManager.Memcached.MemcachedCacheHandle`1.#ctor(CacheManager.Core.ICacheManagerConfiguration,CacheManager.Core.CacheHandleConfiguration,CacheManager.Core.Logging.ILoggerFactory,CacheManager.Core.Internal.ICacheSerializer,Enyim.Caching.Configuration.MemcachedClientConfiguration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:CacheManager.Memcached.MemcachedCacheHandle`1"/> class.
+            </summary>
+            <param name="managerConfiguration">The manager configuration.</param>
+            <param name="configuration">The cache handle configuration.</param>
+            <param name="loggerFactory">The logger factory.</param>
+            <param name="serializer">The serializer.</param>
+            <param name="clientConfiguration">The <see cref="T:Enyim.Caching.Configuration.MemcachedClientConfiguration"/> to use to create the <see cref="T:Enyim.Caching.MemcachedClient"/>.</param>
+        </member>
+        <member name="P:CacheManager.Memcached.MemcachedCacheHandle`1.IsDistributedCache">
+            <inheritdoc />
+        </member>
+        <member name="P:CacheManager.Memcached.MemcachedCacheHandle`1.Count">
+            <summary>
+            Gets the number of items the cache handle currently maintains.
+            </summary>
+            <value>The count.</value>
+        </member>
+        <member name="P:CacheManager.Memcached.MemcachedCacheHandle`1.GetMemcachedClientConfiguration">
+            <summary>
+            Gets the get memcached client configuration.
+            </summary>
+            <value>The get memcached client configuration.</value>
+        </member>
+        <member name="P:CacheManager.Memcached.MemcachedCacheHandle`1.ServerItemCount">
+            <summary>
+            Gets the total number of items per server.
+            </summary>
+            <value>The total number of items per server.</value>
+        </member>
+        <member name="P:CacheManager.Memcached.MemcachedCacheHandle`1.Servers">
+            <summary>
+            Gets the servers.
+            </summary>
+            <value>The servers.</value>
+        </member>
+        <member name="P:CacheManager.Memcached.MemcachedCacheHandle`1.Cache">
+            <summary>
+            Gets the cache.
+            </summary>
+            <value>The cache.</value>
+        </member>
+        <member name="P:CacheManager.Memcached.MemcachedCacheHandle`1.Logger">
+            <inheritdoc />
+        </member>
+        <member name="M:CacheManager.Memcached.MemcachedCacheHandle`1.Clear">
+            <summary>
+            Clears this cache, removing all items in the base cache and all regions.
+            </summary>
+        </member>
+        <member name="M:CacheManager.Memcached.MemcachedCacheHandle`1.ClearRegion(System.String)">
+            <summary>
+            Clears the cache region, removing all items from the specified <paramref name="region"/> only.
+            </summary>
+            <remarks>Not supported for memcached.</remarks>
+            <param name="region">The cache region.</param>
+        </member>
+        <member name="M:CacheManager.Memcached.MemcachedCacheHandle`1.Exists(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:CacheManager.Memcached.MemcachedCacheHandle`1.Exists(System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:CacheManager.Memcached.MemcachedCacheHandle`1.Update(System.String,System.Func{`0,`0},System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:CacheManager.Memcached.MemcachedCacheHandle`1.Update(System.String,System.String,System.Func{`0,`0},System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:CacheManager.Memcached.MemcachedCacheHandle`1.AddInternalPrepared(CacheManager.Core.CacheItem{`0})">
+            <summary>
+            Adds a value to the cache.
+            </summary>
+            <param name="item">The <c>CacheItem</c> to be added to the cache.</param>
+            <returns>
+            <c>true</c> if the key was not already added to the cache, <c>false</c> otherwise.
+            </returns>
+        </member>
+        <member name="M:CacheManager.Memcached.MemcachedCacheHandle`1.Dispose(System.Boolean)">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting
+            unmanaged resources.
+            </summary>
+            <param name="disposeManaged">Indicator if managed resources should be released.</param>
+        </member>
+        <member name="M:CacheManager.Memcached.MemcachedCacheHandle`1.GetCacheItemInternal(System.String)">
+            <summary>
+            Gets a <c>CacheItem</c> for the specified key.
+            </summary>
+            <param name="key">The key being used to identify the item within the cache.</param>
+            <returns>The <c>CacheItem</c>.</returns>
+        </member>
+        <member name="M:CacheManager.Memcached.MemcachedCacheHandle`1.GetCacheItemInternal(System.String,System.String)">
+            <summary>
+            Gets a <c>CacheItem</c> for the specified key.
+            </summary>
+            <param name="key">The key being used to identify the item within the cache.</param>
+            <param name="region">The cache region.</param>
+            <returns>The <c>CacheItem</c>.</returns>
+        </member>
+        <member name="M:CacheManager.Memcached.MemcachedCacheHandle`1.PutInternalPrepared(CacheManager.Core.CacheItem{`0})">
+            <summary>
+            Puts the <paramref name="item"/> into the cache. If the item exists it will get updated
+            with the new value. If the item doesn't exist, the item will be added to the cache.
+            </summary>
+            <param name="item">The <c>CacheItem</c> to be added to the cache.</param>
+        </member>
+        <member name="M:CacheManager.Memcached.MemcachedCacheHandle`1.RemoveInternal(System.String)">
+            <summary>
+            Removes a value from the cache for the specified key.
+            </summary>
+            <param name="key">The key being used to identify the item within the cache.</param>
+            <returns>
+            <c>true</c> if the key was found and removed from the cache, <c>false</c> otherwise.
+            </returns>
+        </member>
+        <member name="M:CacheManager.Memcached.MemcachedCacheHandle`1.RemoveInternal(System.String,System.String)">
+            <summary>
+            Removes a value from the cache for the specified key.
+            </summary>
+            <param name="key">The key being used to identify the item within the cache.</param>
+            <param name="region">The cache region.</param>
+            <returns>
+            <c>true</c> if the key was found and removed from the cache, <c>false</c> otherwise.
+            </returns>
+        </member>
+        <member name="M:CacheManager.Memcached.MemcachedCacheHandle`1.Store(Enyim.Caching.Memcached.StoreMode,CacheManager.Core.CacheItem{`0},System.Boolean@)">
+            <summary>
+            Stores the item with the specified mode.
+            </summary>
+            <remarks>
+            Memcached only supports expiration of seconds, meaning anything less than one second will mean zero, which means it expires right after adding it.
+            </remarks>
+            <param name="mode">The mode.</param>
+            <param name="item">The item.</param>
+            <param name="shouldRetry">Flag indicating if the operation should be retried. Returnd succssess code will be false anyways.</param>
+            <returns>The result.</returns>
+        </member>
+        <member name="M:CacheManager.Memcached.MemcachedCacheHandle`1.GetEnyimSectionName(System.String)">
+            <summary>
+            Gets the name of the enyim section.
+            </summary>
+            <param name="handleName">Name of the handle.</param>
+            <returns>The section name.</returns>
+        </member>
+        <member name="M:CacheManager.Memcached.MemcachedCacheHandle`1.GetSection">
+            <summary>
+            Gets the section.
+            </summary>
+            <returns>The client configuration.</returns>
+            <exception cref="T:System.Configuration.ConfigurationErrorsException">
+            If memcached client section was not found or there are no servers defined for memcached.
+            </exception>
+        </member>
+        <member name="T:CacheManager.Core.MemcachedConfigurationBuilderExtensions">
+            <summary>
+            Extensions for the configuration builder specific to the Memcached cache handle.
+            </summary>
+        </member>
+        <member name="M:CacheManager.Core.MemcachedConfigurationBuilderExtensions.WithMemcachedCacheHandle(CacheManager.Core.ConfigurationBuilderCachePart,System.String,System.Boolean)">
+            <summary>
+            Adds a <see cref="T:CacheManager.Memcached.MemcachedCacheHandle`1"/>. The <paramref name="configurationName"/> must match with cache configured via enyim configuration section.
+            </summary>
+            <param name="part">The builder part.</param>
+            <param name="configurationName">The configuration name.</param>
+            <param name="isBackplaneSource">
+            Set this to true if this cache handle should be the source of the backplane.
+            <para>This setting will be ignored if no backplane is configured.</para>
+            </param>
+            <returns>The part.</returns>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown if handleName or handleType are null.
+            </exception>
+        </member>
+        <member name="M:CacheManager.Core.MemcachedConfigurationBuilderExtensions.WithMemcachedCacheHandle(CacheManager.Core.ConfigurationBuilderCachePart,Enyim.Caching.MemcachedClient,System.Boolean)">
+            <summary>
+            Adds a <see cref="T:CacheManager.Memcached.MemcachedCacheHandle`1"/> with a preconfigured <see cref="T:Enyim.Caching.MemcachedClient"/> instance.
+            </summary>
+            <param name="part">The builder part.</param>
+            <param name="client">The <see cref="T:Enyim.Caching.MemcachedClient"/> to use for this cache handle.</param>
+            <param name="isBackplaneSource">
+            Set this to true if this cache handle should be the source of the backplane.
+            <para>This setting will be ignored if no backplane is configured.</para>
+            </param>
+            <returns>The part.</returns>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown if <paramref name="client"/> is null.
+            </exception>
+        </member>
+        <member name="M:CacheManager.Core.MemcachedConfigurationBuilderExtensions.WithMemcachedCacheHandle(CacheManager.Core.ConfigurationBuilderCachePart,System.String,Enyim.Caching.MemcachedClient,System.Boolean)">
+            <summary>
+            Adds a <see cref="T:CacheManager.Memcached.MemcachedCacheHandle`1"/>. The <paramref name="configurationName"/> must match with cache configured via enyim configuration section.
+            </summary>
+            <param name="part">The builder part.</param>
+            <param name="configurationName">The configuration name.</param>
+            <param name="client">The <see cref="T:Enyim.Caching.MemcachedClient"/> to use for this cache handle.</param>
+            <param name="isBackplaneSource">
+            Set this to true if this cache handle should be the source of the backplane.
+            <para>This setting will be ignored if no backplane is configured.</para>
+            </param>
+            <returns>The part.</returns>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown if <paramref name="client"/> is null.
+            </exception>
+        </member>
+        <member name="M:CacheManager.Core.MemcachedConfigurationBuilderExtensions.WithMemcachedCacheHandle(CacheManager.Core.ConfigurationBuilderCachePart,Enyim.Caching.Configuration.MemcachedClientConfiguration,System.Boolean)">
+            <summary>
+            Adds a <see cref="T:CacheManager.Memcached.MemcachedCacheHandle`1"/> using the <paramref name="clientConfiguration"/> to setup a <see cref="T:Enyim.Caching.MemcachedClient"/> instance.
+            </summary>
+            <param name="part">The builder part.</param>
+            <param name="clientConfiguration">The <see cref="T:Enyim.Caching.Configuration.MemcachedClientConfiguration"/> to use to create the <see cref="T:Enyim.Caching.MemcachedClient"/> for this cache handle.</param>
+            <param name="isBackplaneSource">
+            Set this to true if this cache handle should be the source of the backplane.
+            <para>This setting will be ignored if no backplane is configured.</para>
+            </param>
+            <returns>The part.</returns>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown if <paramref name="clientConfiguration"/> is null.
+            </exception>
+        </member>
+        <member name="M:CacheManager.Core.MemcachedConfigurationBuilderExtensions.WithMemcachedCacheHandle(CacheManager.Core.ConfigurationBuilderCachePart,System.String,Enyim.Caching.Configuration.MemcachedClientConfiguration,System.Boolean)">
+            <summary>
+            Adds a <see cref="T:CacheManager.Memcached.MemcachedCacheHandle`1"/> using the <paramref name="clientConfiguration"/> to setup a <see cref="T:Enyim.Caching.MemcachedClient"/> instance.
+            </summary>
+            <param name="part">The builder part.</param>
+            <param name="configurationName">The configuration name.</param>
+            <param name="clientConfiguration">The <see cref="T:Enyim.Caching.Configuration.MemcachedClientConfiguration"/> to use to create the <see cref="T:Enyim.Caching.MemcachedClient"/> for this cache handle.</param>
+            <param name="isBackplaneSource">
+            Set this to true if this cache handle should be the source of the backplane.
+            <para>This setting will be ignored if no backplane is configured.</para>
+            </param>
+            <returns>The part.</returns>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown if <paramref name="clientConfiguration"/> is null.
+            </exception>
+        </member>
+    </members>
+</doc>

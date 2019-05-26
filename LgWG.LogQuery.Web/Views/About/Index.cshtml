@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.ActiveMenu = PageNames.About; //The menu item will be active for this page.
+    ViewBag.Title = "关于本系统";
+}
+<div class="row clearfix" style="margin-top:90px">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    关于日志查询平台
+                </h2>
+            </div>
+            <div class="body">
+                <p>
+                    本系统是利用ABP框架(ASP.NET Boilerplate)开发的集中式日志日志查询平台。
+                </p>
+                <h3>本系统是什么？</h3>
+                <p>
+                    它查询日志数据库的数据(Log2Net组件存储的日志数据），显示各服务器/网站的实时数据图表显示，提供操作轨迹数据和监控数据的查询功能，并对异常情况进行告警。
+                </p>
+
+                <h3>Log2Net是什么？</h3>
+                <p>
+                    Log2Net是一个用于收集日志到数据库或文件的组件。此组件自动收集系统的运行日志（服务器运行情况、在线人数等）、异常日志。程序员还可以添加自定义日志。<br />
+                    该组件支持.NET平台和.NETCore平台，支持将日志写入到文本文件、SQL Server、Oracle、MySQL，可以方便地扩展到其他数据库。<br />
+                    用户只需要使用Nuget安装Log2Net组件，进行简单的配置，即可实现日志收集功能。
+                </p>
+
+                <h3>本系统的功能</h3>
+                <p>1、服务器/网站运行数据图表实时显示；</p>
+                <p>2、监控数据查询；</p>
+                <p>3、操作轨迹数据查询；</p>
+                <p>4、异常情况告警；</p>
+                <p>5、用户权限管理（租户、角色、用户的管理）；</p>
+
+                <h3>开发信息</h3>
+                <p><a href="#">Log2Net WorkGroup</a></p>
+                <p>接口文档：<a href="/swagger/ui/index" target="_blank">/swagger/ui/index</a></p>
+                <p>开源地址：<a href="https://github.com/yuchen1030/Log2Net" target="_blank">https://github.com/yuchen1030/Log2Net</a></p>
+            </div>
+        </div>
+    </div>
+</div>

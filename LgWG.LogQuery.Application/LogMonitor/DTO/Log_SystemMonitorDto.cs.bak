@@ -1,0 +1,65 @@
+﻿using Abp.Application.Services.Dto;
+using Log2Net;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AconOA.LogQuery.LogMonitor.DTO
+{
+    public class Log_SystemMonitorDto : EntityDto
+    {
+        public DateTime Time { get; set; }
+
+
+        public Log2Net.Models.SysCategory SystemID { get; set; }
+
+
+        public string ServerHost { get; set; }
+
+
+        public string ServerIP { get; set; }
+
+
+        public int OnlineCnt { get; set; }
+
+
+        public int AllVisitors { get; set; }
+
+        public decimal RunHours { get; set; }
+
+
+        public decimal CpuUsage { get; set; }
+
+
+        public decimal MemoryUsage { get; set; }
+
+
+        public int ProcessNum { get; set; }
+
+
+        public int ThreadNum { get; set; }
+
+
+        public int CurProcThreadNum { get; set; }
+
+        public decimal CurProcMem { get; set; }
+
+
+        public decimal CurProcMemUse { get; set; }
+
+
+        public decimal CurProcCpuUse { get; set; }
+
+
+        public decimal CurSubProcMem { get; set; }
+
+
+        public string PageViewNum { get; set; }
+
+        public string DiskSpace { get; set; }
+
+        public string Remark { get; set; }
+    }
+}

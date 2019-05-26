@@ -1,0 +1,168 @@
+﻿@using System.Threading
+@using System.Web.Optimization
+@using Abp.Configuration
+@using Abp.Timing
+@using Abp.Web.Mvc.Extensions
+@using LgWG.LogQuery
+@using LgWG.LogQuery.Configuration
+@{
+    Layout = null;
+    SetAntiForgeryCookie();
+    var uiTheme = SettingManager.GetSettingValue(AppSettingNames.UiTheme);
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="shortcut icon" href="~/favicon.ico">
+
+    <title>@ViewBag.Title</title>
+
+    @Styles.Render("~/Bundles/vendor/css")
+
+    <!-- View specific styles -->
+    @RenderSection("styles", required: false)
+
+    <script type="text/javascript">
+        //This is used to get the application's root path from javascript. It's useful if you're running application in a virtual directory under IIS.
+        var abp = abp || {}; abp.appPath = '@ApplicationPath';
+    </script>
+</head>
+
+@*background-image:url('/Images/bg1.jpg');*@
+<body class="@("theme-" + uiTheme)" style="background-color:#D8F2F4; min-width:768px;">
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper">
+        <div class="loader">
+            <div class="preloader">
+                <div class="spinner-layer pl-red">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+            <p>Please wait...</p>
+        </div>
+    </div>
+    <!-- #END# Page Loader -->
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div>
+    <!-- #END# Overlay For Sidebars -->
+    <!-- Search Bar -->
+    <div class="search-bar">
+        <div class="search-icon">
+            <i class="material-icons">search</i>
+        </div>
+        <input type="text" placeholder="START TYPING...">
+        <div class="close-search">
+            <i class="material-icons">close</i>
+        </div>
+    </div>
+    <!-- #END# Search Bar -->
+    <!-- Top Bar -->
+
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
+                <a href="javascript:void(0);" class="bars"></a>
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index"><i class="fa fa-cubes"></i>日志查询平台</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav myMainMenu">
+                    @Html.Action("SideBarNav", "Layout", new { activeMenu = ViewBag.ActiveMenu })
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+
+                    @Html.Action("LanguageSelection", "Layout")
+
+                    <li class="pull-right settingMenuCss"><a href="javascript:void(0);" class="js-right-sidebar " data-close="true"><i class="material-icons">more_vert</i></a></li>
+
+                    @Html.Action("SideBarUserArea", "Layout")
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- #Top Bar -->
+    <section>
+
+
+        @Html.Action("RightSideBar", "Layout")
+
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            @RenderBody()
+        </div>
+    </section>
+
+    <div style="clear: both;"></div>
+
+    <div style="text-align:center;">
+
+
+        <footer>
+            <div class="">
+                <p style="color:gray">&copy; 2018~@DateTime.Now.Year - 日志查询平台(Log2Net WorkGroup)</p>
+                <p style="color:lightgray"><b>Version </b> @AppVersionHelper.Version [@AppVersionHelper.ReleaseDate.ToString("yyyyMMdd")]</p>
+
+            </div>
+
+        </footer>
+
+    </div>
+
+
+    @Scripts.Render("~/Bundles/vendor/js/bottom")
+
+    <script>
+        //Localizing momentjs
+        moment.locale('@Thread.CurrentThread.CurrentUICulture.Name');
+    </script>
+
+    <!-- Dynamic scripts of ABP system (They are created on runtime and can not be bundled) -->
+    <script src="~/api/AbpServiceProxies/GetAll?v=@(Clock.Now.Ticks)"></script>
+    <script src="~/AbpScripts/GetScripts?v=@(Clock.Now.Ticks)" type="text/javascript"></script>
+
+    <!-- SignalR scripts -->
+    <script src="~/signalr/hubs"></script>
+    @Html.IncludeScript("~/Abp/Framework/scripts/libs/abp.signalr.js")
+
+    <!-- View specific scripts -->
+    @RenderSection("scripts", required: false)
+    <script>
+        function GetOneColor(index) {
+    try {
+        var colorNames = Object.keys(window.chartColors);
+        if (index < colorNames.length) {
+            return window.chartColors[colorNames[index]];
+        } else {
+            return getRandomColor(index);
+        }
+    }
+    catch{
+        return getRandomColor(index);
+    }
+}
+
+function getRandomColor(rndNum) {
+    var seed = new Date().getTime();
+    seed = (seed * 9301 + 49297) % 233280.0;
+    seed = seed * (rndNum + 17) / (233280.0) / (rndNum + 13);
+    return '#' + Math.ceil(seed * 65535).toString(16);
+}
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Abp.Application.Services;
+using Abp.Application.Services.Dto;
+using AconOA.LogQuery.Roles.Dto;
+using static AconOA.LogStash.Common.LogBasicClass;
+
+namespace AconOA.LogQuery.Roles
+{
+    public interface IRoleAppService : IAsyncCrudAppService<RoleDto, int, PagedResultRequestDto, CreateRoleDto, RoleDto>
+    {
+        Task<ListResultDto<PermissionDto>> GetAllPermissions();
+        List<SysCategory> GetSysCategoryAccordingRoleID();
+    }
+}

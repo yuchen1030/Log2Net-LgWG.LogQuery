@@ -1,0 +1,26 @@
+﻿using Abp.Application.Services.Dto;
+using AconOA.LogStash.Common;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AconOA.LogQuery.LogTrace.DTO
+{
+    public class Log_OperateTraceDto : EntityDto
+    {
+        public DateTime Time { get; set; }
+        public string UserID { get; set; }
+        public string UserName { get; set; }
+        public LogBasicClass.LogType LogType { get; set; }
+        public LogBasicClass.SysCategory SystemID { get; set; }
+        public string ServerHost { get; set; }
+        public string ServerIP { get; set; }
+        public string ClientHost { get; set; }
+        public string ClientIP { get; set; }
+        public string TabOrModu { get; set; }
+        public string Detail { get; set; }   
+        public string Remark { get; set; }
+    }
+}

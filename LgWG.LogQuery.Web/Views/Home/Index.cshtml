@@ -1,0 +1,249 @@
+﻿@using System.Web.Optimization
+@{
+    ViewBag.Title = "日志查询主页";
+    ViewBag.ActiveMenu = PageNames.Home; //The menu item will be active for this page.
+}
+@section styles {
+    <link href="~/lib/morris.js/morris.css" rel="stylesheet" />
+    <link href="/Css/datepicker3.css" rel="stylesheet" type="text/css" />
+    <link href="/Css/bootstrap-dialog.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css">
+    <style>
+        .tableMargin {
+            margin-top: 30px;
+            padding-top: 5px;
+            padding-bottom: -20px;
+        }
+
+        .chartDivCss {
+            border: 1px dotted azure;
+            border-color: burlywood;
+        }
+
+        .clickToShowModalCss {
+            color: indianred;
+            font-size: 15px;
+            cursor: pointer;
+            background-color: transparent; /* 背景色透明 */
+            border: 0px; /* 边框取消 */
+        }
+
+        .splitLineCss {
+            padding-bottom: 10px;
+            border-bottom: 2px solid green
+        }
+    </style>
+}
+
+@section scripts{
+    <script src="~/Views/Home/utils.js"></script>
+
+    <script src="~/js/myBootstrapTableDatepicker.js"></script>
+
+
+    @Scripts.Render("~/Bundles/home-index")
+    <script src="~/Views/Home/Index.js?v=20190317"></script>
+
+
+}
+<div style="margin-bottom:90px">
+</div>
+
+
+
+
+<!-- Widgets -->
+<div class="row clearfix">
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" id="webSiteDiv" title="">
+        <div class="info-box bg-pink hover-expand-effect">
+            <div class="icon">
+                <i class="material-icons">web</i>
+            </div>
+            <div class="content">
+                <div class="text">网站个数</div>
+                @*<div class="number count-to" data-from="0" data-to="125" data-speed="1000" data-fresh-interval="20">0/10</div>*@
+                <div class="number">  <span id="webAllSpan">0</span></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" id="serverDiv">
+        <div class="info-box bg-cyan hover-expand-effect">
+            <div class="icon">
+                <i class="material-icons">computer</i>
+            </div>
+            <div class="content">
+                <div class="text">服务器台数</div>
+                <div class="number"><span id="serverAllSpan">0</span> </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" id="dayLogDiv">
+        <div class="info-box bg-light-green hover-expand-effect">
+            <div class="icon">
+                <i class="material-icons">forum</i>
+            </div>
+            <div class="content">
+                <div class="text">今日新增监控日志</div>
+                <div class="number">  <span id="dayLogAllSpan">0</span> </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box bg-orange hover-expand-effect">
+            <div class="icon">
+                <i class="material-icons">watch_later</i>
+            </div>
+            <div class="content">
+                <div class="text">更新时间</div>
+                <div class="number" id="refreshT">@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")</div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #END# Widgets -->
+
+<div id="warnningMusicDiv" style="display:none;float:right">
+    <audio controls="controls" id="warning-sound">
+        <source loop="loop" src="~/images/Kalimba.mp3" type="audio/mpeg" />
+    </audio>
+</div>
+
+<div style="margin:20px 10px;font-size:20px; " class="form-inline">
+    监控范围：<button id="monitorRangeShow" class="label clickToShowModalCss" title="点击之可更改该设置" data-toggle="modal" data-target="#monitorRangeModal">最新 100 点</button>
+    显示点数：<input id="monitorPonitShow" class="form-control input-sm" value="100" style="margin-right:10px;width:80px" />
+    横轴时间格式：<select id="xAxisFormateCmb" class="selectpicker col-xs-1">
+        <option value="M-d H:m:s">M-d H:m:s</option>
+        <option value="M-d H:m">M-d H:m</option>
+        <option value="M-d H">M-d H</option>
+        <option value="d H:m:s">d H:m:s</option>
+        <option value="d H:m">d H:m</option>
+        <option value="H:m:s">H:m:s</option>
+        <option value="H:m">H:m</option>
+        <option value="H">H</option>
+    </select>&nbsp;
+
+    <button style="margin:0 10px;" class="label clickToShowModalCss" id="realTimeModeShowBtn" title="点击之可更改该设置" data-toggle="modal" data-target="#realTimeModal"> 实时模式，每10秒刷新，窗口滑动 </button>
+
+    <button. id="chartRefreshBtn" type="button" style="background-color:#D8F2F4 !important;padding-left:0px;margin-left:10px" class="btn btn-xs" title="刷新">
+        <i class="material-icons">refresh</i>
+    </button.>
+
+    <span class="" style="margin-right:10px;float:right">
+        <span class="switch panel-switch-btn">
+            <label>查询模式<input type="checkbox" id="chartRealTimeMode" class="ckRealTime" checked="checked"><span class="lever switch-col-cyan"></span>实时模式</label>
+        </span>
+    </span>
+
+
+</div>
+
+
+
+@*各服务器的曲线显示图，动态添加*@
+<div id="chartsDiv" class="splitLineCss">
+</div>
+
+@*table显示监控数据界面*@
+<div class="row clearfix">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 tableMargin">
+        <div class="panel-body" style="padding: 2px;">
+            <div class="container00 form-inline" style="padding:2px;margin:2px; width: 100%;" id="toolbar">
+                时段：<input type="text" id="from-date" style="width:110px;" class="form-control date" data-date-format="yyyy-mm-dd" initialDate="new Date()" /> ~
+                <input type="text" id="to-date" style="width:110px;" class="form-control date" data-date-format="yyyy-mm-dd" autoclose="true" />  &nbsp;
+                系统：<select id="appNameCmb" class="selectpicker" data-live-search="true" data-live-search-placeholder="搜索"></select>&nbsp;
+                服务器：<select id="serverNameCmb" class="selectpicker" data-live-search="true" data-live-search-placeholder="搜索"><option value="">所有</option></select>&nbsp;
+                <a href="javascript:void(0)" id="btn-search" class="btn btn-primary">查询</a>
+            </div>
+            <table id="logMonitorTable"></table>
+        </div>
+    </div>
+</div>
+
+
+@*监控范围设置modal界面*@
+<div class="modal fade" id="monitorRangeModal" tabindex="-1" role="dialog" aria-labelledby="monitorRangeModalLabel" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <span>监控范围选择</span>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form name="monitorRangeModalForm" role="form" novalidate class="form-validation">
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane animated fadeIn active" id="create-user-roles">
+                            <div class="row">
+                                <div class="col-sm-12 form-inline" for="radioRangeTimeDef">
+                                    <input type="radio" id="radioRangeTimeDef" name="monitorRange" value="0" /><label for="radioRangeTimeDef">自定义时段 </label>
+                                    <input type="datetime-local" id="rangeStartT" value=""><label for="radioRangeTimeDef"> ~ </label><input type="datetime-local" id="rangeEndT" value="">
+                                </div>
+
+                                <div class="col-sm-12 ">
+                                    <input type="radio" id="radioRangeCurDay" name="monitorRange" value="1" /><label for="radioRangeCurDay">当天</label>
+                                </div>
+
+                                <div class="col-sm-12 ">
+                                    <input type="radio" id="radioRangeHours" name="monitorRange" value="2" /><label for="radioRangeHours">最近 </label><input id="rangeHoursNum" class="rangeNum" style="width:50px;height:22px;margin:0 10px" value="2" /> <label for="radioRangeHours"> 小时</label>
+                                </div>
+                                <div class="col-sm-12" style="background:#D8F2F4">
+                                    <input type="radio" id="radioRangePoints" name="monitorRange" checked="checked" value="3" /><label for="radioRangePoints">最新 </label><input id="rangePointsNum" class="rangeNum" style="width:50px;height:22px;margin:0 10px" value="10" /> <label for="radioRangePoints"> 点</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">@L("Cancel")</button>
+                        <button type="submit" class="btn btn-primary waves-effect">确定</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*实时模式设置modal界面*@
+<div class="modal fade" id="realTimeModal" tabindex="-1" role="dialog" aria-labelledby="realTimeModalLabel" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <span>监控模式参数设置</span>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form name="realTimeModalForm" role="form" novalidate class="form-validation">
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane animated fadeIn active">
+
+                            <div class="row">
+                                <span class="switch panel-switch-btn" style="margin-left:35px;">
+                                    <label>查询模式<input type="checkbox" id="modalRealTimeMode" class="ckRealTime" checked="checked"><span class="lever switch-col-cyan"></span>实时模式</label>
+                                </span>
+                            </div>
+
+                            <div class="row" id="realTimeModalDiv" style="padding-top:20px;padding-bottom:20px">
+                                <div class="col-sm-12 form-inline">
+                                    刷新速度(秒)：<input id="rtModalSpeed" class="form-control input-sm" style="width:50px;margin:0 20px" value="10" />
+                                </div>
+
+                                <div class="col-sm-12 form-inline" style="margin-top:20px;">
+                                    <span class="switch panel-switch-btn" style="margin-left:20px">
+                                        <label>窗口扩张<input type="checkbox" id="chartWindowMode" checked="checked"><span class="lever switch-col-cyan"></span>窗口滑动</label>
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="rtModalBtnCancel" class="btn btn-default waves-effect" data-dismiss="modal">@L("Cancel")</button>
+                        <button type="submit" id="rtModalBtnOK" class="btn btn-primary waves-effect">确定</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

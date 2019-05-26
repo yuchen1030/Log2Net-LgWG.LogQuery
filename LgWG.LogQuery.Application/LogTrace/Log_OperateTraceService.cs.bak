@@ -1,0 +1,73 @@
+﻿using Abp.Application.Services;
+using Abp.Application.Services.Dto;
+using Abp.Linq.Extensions;
+using AconOA.LogQuery.LogTrace.DTO;
+using AutoMapper;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Linq.Dynamic.Core;
+using Abp.AutoMapper;
+using Abp.Authorization;
+using AconOA.LogQuery.Authorization;
+using Abp.Authorization.Users;
+using AconOA.LogQuery.Authorization.Roles;
+using Abp.Domain.Repositories;
+using Abp.Runtime.Caching;
+
+namespace AconOA.LogQuery.LogTrace
+{
+    [AbpAuthorize(PermissionNames.Pages_LogTrace)]
+    public class Log_OperateTraceService : LogQueryAppServiceBase, ILog_OperateTraceService
+    {
+        private readonly ILog_OperateTraceRepository _logTraceRepository;
+        private readonly IRepository<UserRole, long> _userRoleRepository;
+        private readonly IRepository<Role> _roleRepository;
+        private readonly ICacheManager _cacheManager;
+        /// <summary>
+        /// 构造函数自动注入
+        /// </summary>
+        /// <param name="logTraceRepository"></param>
+        public Log_OperateTraceService(ILog_OperateTraceRepository logTraceRepository, IRepository<UserRole, long> userRoleRepository, IRepository<Role> roleRepository, ICacheManager cacheManager) : base(userRoleRepository, roleRepository, cacheManager)
+        {
+            _logTraceRepository = logTraceRepository;
+        }
+
+        /// <summary>
+        /// 获取轨迹日志（具体实现）
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public PagedResultDto<Log_OperateTraceDto> GetLogTraces(GetLogTraceInput input)
+        {
+            var enumList = GetUserSysCategoryAccordingRoleID();
+
+            var query = _logTraceRepository.GetAll();
+            query = query.WhereIf(input.LogType != LogStash.Common.LogBasicClass.LogType.所有, a => a.LogType == input.LogType);
+            query = query.WhereIf(input.StartT != new DateTime(), a => a.Time >= input.StartT & a.Time < input.EndT);
+            if (!input.SystemID .Contains( LogStash.Common.LogBasicClass.SysCategory.ALL))
+            {
+                query = query.Where(a =>  input.SystemID.Contains(a.SystemID));
+            }
+            else
+            {
+                query = query.Where( a => enumList.Contains(a.SystemID));
+            }
+            query = query.WhereIf(!string.IsNullOrEmpty(input.ServerHost), a => a.ServerHost == input.ServerHost);
+            query = query.WhereIf(!string.IsNullOrEmpty(input.ServerIP), a => a.ServerIP == input.ServerIP);
+            query = query.WhereIf(!string.IsNullOrEmpty(input.UserName), a => a.UserName.Contains(input.UserName));
+            query = query.WhereIf(!string.IsNullOrEmpty(input.ModuTable), a => a.TabOrModu.ToLower().Contains(input.ModuTable.ToLower()));
+            query = query.WhereIf(!string.IsNullOrEmpty(input.KeyWord), a => a.Detail.ToLower().Contains(input.KeyWord.ToLower()));
+            query = query.WhereIf(input.Express != null, input.Express);
+            var totalCount = query.Count();
+            input.Sorting = input.Sorting.Replace("SysName", "SystemID").Replace("LogTypeCN", "LogType");
+            var list = query.OrderBy(input.Sorting).PageBy(input).ToList();
+            var listDtos = list.MapTo<List<Log_OperateTraceDto>>();
+            return new PagedResultDto<Log_OperateTraceDto>(totalCount, listDtos);
+
+        }
+
+    }
+}

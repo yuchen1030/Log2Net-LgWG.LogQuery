@@ -1,0 +1,446 @@
+﻿@*@model Abp.Application.Services.Dto.PagedResultDto<LgWG.LogQuery.LogTrace.DTO.Log_OperateTraceDto>*@
+@using System.Web.Optimization
+@model LgWG.LogQuery.Web.Models.IndexView
+@{
+    ViewBag.Title = "日志查询";
+}
+
+@section styles{
+    <link href="/Css/datepicker3.css" rel="stylesheet" type="text/css" />
+    <link href="/Css/website.css" rel="stylesheet" type="text/css" />
+    <link href="/Css/bootstrap-dialog.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css">
+    <style>
+
+
+        .minWidthCls {
+            min-width: 768px;
+            width: 100%;
+            overflow: auto;
+        }
+
+        input[type="checkbox"] {
+            /*cursor: pointer;
+            color: red;
+            opacity:0.5*/
+        }
+
+        .left {
+            width: 250px;
+            float: left;
+        }
+
+        .middleCss {
+            margin: 0 5px 0 255px;
+        }
+
+            .middleCss .midContent {
+                width: 100%;
+                /*background: #F60;*/
+                float: left;
+            }
+    </style>
+}
+
+<div>
+    <div class="jumbotron0">
+
+        <div id="lst-app" style="width:250px" class="left">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span onclick="ChangeApp('-1','所有网站','')">网站应用</span>
+                    <a class="label label-default" href="javascript:void(0)" style="float:right" onclick="ChangeApp('-1','所有网站','')">所有</a>
+                </div>
+                <div class="panel-body">
+
+                    <ul class="nav-list">
+                        @foreach (LgWG.LogQuery.LogMonitor.DTO.ApplicationData app in Model.Apps)
+                        {
+                            <li>
+                                <a id="@app.ID" onclick="ChangeApp('@app.ID','@app.Name','')" class="tree-toggle nav-header app label label-info">@app.Name</a>
+                                <ul class="nav-list tree ">
+                                    @foreach (LgWG.LogQuery.LogMonitor.DTO.ApplicationHost host in app.Hosts)
+                                    {
+                                        <li>
+                                            <a id="@host.ID" href="#" onclick="ChangeApp('@app.ID','@app.Name','@host.ServerHost');" class="host label @Html.Raw(host.Enabled ? "label-success" : "label-danger")">@host.ServerHost</a>
+                                            <span id="@Html.Raw(host.ID+"-memory")" class="label label-primary" style="float: right">Mem:0%</span>
+                                            <span id="@Html.Raw(host.ID+"-cpu")" class="label label-primary" style="float: right; margin-right: 10px">CPU:0%</span>
+                                        </li>
+
+                                    }
+                                </ul>
+                            </li>
+                            <li class="divider"></li>
+
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="lst-log" class="logDiv middleCss">
+            <div class="panel panel-default midContent">
+                <div class="panel-heading">
+                    <span id="app-title" class="label label-default">所有网站</span><span id="app-host" class="label label-default"></span>
+                </div>
+                <div class="panel-body" style="padding: 2px;background-color:#D8F2F4;">
+                    <div class="container00 form-inline" style="padding:2px;margin:2px; width: 100%;" id="toolbar_skip">
+                        时段：<input type="text" id="from-date" style="width:110px;" class="form-control date input-sm" data-date-format="yyyy-mm-dd" initialDate="new Date()" /> ~
+                        <input type="text" id="to-date" style="width:110px;" class="form-control date input-sm" data-date-format="yyyy-mm-dd" autoclose="true" />  &nbsp;
+                        类型：<select id="log-type" class="selectpicker" data-live-search="true" data-live-search-placeholder="搜索"></select>&nbsp;
+                        用户：<input type="text" id="userName" class="form-control input-sm" placeholder="用户姓名" style="width:80px;" />&nbsp;
+                        模块/表名：<input type="text" id="modTab" class="form-control input-sm" placeholder="模块或表名" style="width:120px;" />&nbsp;
+                        关键词：<input type="text" id="keyWord" class="form-control input-sm" placeholder="详情中的关键词" style="width:130px;" />&nbsp;
+                        <a href="javascript:void(0)" id="btn-search" class="btn btn-primary">查询</a>
+                    </div>
+
+
+
+
+                    <div class="container-fluid">
+                        <div class="accordion" id="accordionPieChart">
+                            <div class="accordion-group">
+                                <div class="accordion-heading">
+                                    当前共有 <span id="totalNumSpan" style="color:red;">0</span> 条数据，其中异常数据有 
+                                    <span id="exceptNumSpan" style="color:red;font-size:large;cursor:pointer;text-decoration:underline">0</span> 条。
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionPieChart" href="#collapseOne">
+                                        点击此处可显示/隐藏分类汇总饼图
+                                    </a>
+                                </div>
+                                <div id="collapseOne" class="accordion-body" style="height: 0px; ">
+                                    <div class="accordion-inner">
+                                        <div id="pieChartsDiv" class="chartDivCss row clearfix">
+
+                                            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 chartDivCss">
+                                                <canvas id="serverPieChart"></canvas>
+                                            </div>
+
+                                            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 chartDivCss">
+                                                <canvas id="appPieChart"></canvas>
+                                            </div>
+
+                                            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 chartDivCss">
+                                                <canvas id="logTypePieChart"></canvas>
+                                            </div>
+                                            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 chartDivCss">
+                                                <canvas id="logUserPieChart"></canvas>
+                                            </div>
+
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <table id="logTraceTable"></table>
+                </div>
+
+
+
+            </div>
+        </div>
+
+        <div style="clear: both;" />
+    </div>
+
+</div>
+
+
+@section scripts{
+
+    <script src="~/Views/Home/utils.js"></script>
+    @Scripts.Render("~/Bundles/home-index")
+    <script src="~/js/myBootstrapTableDatepicker.js"></script>
+
+    <script type='text/javascript'>
+        var selectAppID = -1;
+        var selectHost = "";
+
+        $(function () {
+
+            $("#from-date").val(getDateStr(-7));
+            $("#to-date").val(getDateStr(0));
+
+            //1.初始化Table
+            var oTable = new TableInit();
+            oTable.Init();
+
+            getCmbOptions_Glob('/LogTrace/GetAllLogTypeList', 'log-type');
+
+            $(".date").datepicker({
+                language: "zh-CN",
+                autoclose: true,//选中之后自动隐藏日期选择框
+                //clearBtn: true,//清除按钮
+                //todayBtn: true,//今日按钮
+                format: "yyyy-mm-dd"//日期格式，
+            });
+
+            $('#log-type').bind('change', function () {
+                searchLogTraceData(0);
+            });
+
+            $("#btn-search").click(function () {
+                searchLogTraceData(0);
+            });
+
+            $("#exceptNumSpan").click(function () {
+              //  $('#log-type').val('@ViewBag.LogTypeExceptNum');
+                $('#log-type').selectpicker('val', '@ViewBag.LogTypeExceptNum');
+                searchLogTraceData(0);
+            });
+
+            $('.tree-toggle').click(function () {
+                $(this).parent().children('ul.tree').toggle(200);
+            });
+
+            $('ul.tree').toggle(200);
+            $('ul.tree').slideDown();
+            $('.form-control.date').datepicker({});
+          //  searchLogTraceData(0);
+
+        });
+        var int = self.setInterval("GetAppStatus()", 5000)
+
+        function ChangeApp(appID, appName, host) {
+            $('#app-title').html(appName)
+            $('#app-host').html(host);
+            selectAppID = appID;
+            selectHost = host;
+            if (appID == -1) {
+                GetAppStatus();
+            }
+            searchLogTraceData(0);
+        }
+
+
+        function GetAppStatus() {
+            $.getJSON("/LogTrace/GetAppStatus", { startT: $("#from-date").val(), endT: $("#to-date").val() }, function (result) {
+                $.each(result, function (i, field) {
+                    $.each(field.Hosts, function (i, host) {
+                        if (host.Enabled) {
+                            $('#' + host.ID).removeClass('label-danger');
+                            $('#' + host.ID).addClass('label-success');
+                            $('#' + host.ID + "-cpu").html("CPU:" + host.CpuUsage + "%");
+                            $('#' + host.ID + "-memory").html("Mem:" + host.MemoryUsage + "%");
+                        }
+                        else {
+                            $('#' + host.ID).removeClass('label-success');
+                            $('#' + host.ID).addClass('label-danger');
+                        }
+                    });
+                });
+            });
+        }
+
+
+        function searchLogTraceData() {
+            refreshBootstrapTable('logTraceTable');
+        }
+
+        var TableInit = function () {
+            var oTableInit = new Object();
+            //初始化Table
+            oTableInit.Init = function () {
+                $('#logTraceTable').bootstrapTable({
+                    url: '/LogTrace/GetLogTraceData',         //请求后台的URL（*）
+                    method: 'get',                      //请求方式（*）
+                    toolbar: '#toolbar',                //工具按钮用哪个容器
+                    striped: true,                      //是否显示行间隔色
+                    cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+                    pagination: true,                   //是否显示分页（*）
+                    sortable: true,                     //是否启用排序
+                    sortOrder: "desc",                   //排序方式
+                    queryParams: oTableInit.queryParams,//传递参数（*）
+                    sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+                    pageNumber: 1,                       //初始化加载第一页，默认第一页
+                    pageSize: 20,                       //每页的记录行数（*）
+                    pageList: [5, 10, 20, 50, 100],        //可供选择的每页的行数（*）
+                    search: false,                       //是否显示表格搜索，自定义搜索，不使用自带的
+                    contentType: "application/x-www-form-urlencoded",
+                    strictSearch: true,
+                    showColumns: true,                  //是否显示所有的列
+                    showRefresh: true,                  //是否显示刷新按钮
+                    minimumCountColumns: 2,             //最少允许的列数
+                    clickToSelect: true,                //是否启用点击选中行
+                    //  height: 700,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+                    uniqueId: "Id",                     //每一行的唯一标识，一般为主键列
+                    showToggle: true,                    //是否显示详细视图和列表视图的切换按钮
+                    cardView: false,                    //默认显示详细视图
+                    detailView: false,                   //是否显示父子表
+                    columns: [
+                        {
+                            field: 'Id',
+                            title: '编号',
+                            sortable: true
+                        }, {
+                            field: 'LogTime',
+                            title: '时间',
+                            sortable: true,
+                            formatter: function (value, row, index) {
+                                return changeDateFormat(value);
+                            }
+                        }, {
+                            field: 'UserName',
+                            title: '用户名',
+                            sortable: true
+                        }, {
+                            field: 'LogTypeCN',
+                            title: '日志类型',
+                            sortable: true,
+                            formatter: function (value, row, index) {
+                                return value.toString();
+                            }
+                        }, {
+                            field: 'Detail',
+                            title: '日志内容',
+                            sortable: true
+                        }, {
+                            field: 'TabOrModu',
+                            title: '模块或表名',
+                            sortable: true
+                        }, {
+                            field: 'SysName',
+                            title: '系统名称',
+                            sortable: true
+                        }, {
+                            field: 'ServerHost',
+                            title: '服务器名称',
+                            sortable: true
+                        }, {
+                            field: 'ServerIP',
+                            title: '服务器IP',
+                            sortable: true
+                        }, {
+                            field: 'ClientHost',
+                            title: '用户主机名',
+                            sortable: true
+                        }, {
+                            field: 'ClientIP',
+                            title: '用户IP',
+                            sortable: true
+                        }
+
+                    ],
+                    //rowStyle: function (row, index) {
+                    //    var classesArr = ['success', 'info'];
+                    //    var strclass = "";
+                    //    if (index % 2 === 0) {//偶数行
+                    //        strclass = classesArr[0];
+                    //    } else {//奇数行
+                    //        strclass = classesArr[1];
+                    //    }
+                    //    return { classes: strclass };
+                    //},//隔行变色
+
+                    onLoadSuccess: function (data) {
+                        $("#logTraceTable").bootstrapTable("load", data.Result);
+                        try {
+                            $("#exceptNumSpan").text(data.Result.ErrLogNum);
+                            $("#totalNumSpan").text(data.Result.total);
+                            createPieCharts(data.Result.NameDatas);
+                        } catch (ex) {
+                        }
+                        // return false;
+                    },
+
+                    onLoadError: function (data) {
+                        // return false;
+                    },
+
+
+                });
+
+            };
+
+
+            //得到查询的参数
+            oTableInit.queryParams = function (params) {
+                var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                    limit: params.limit,   //页面大小
+                    offset: params.offset,
+                    sortby: params.sort, //排序字段
+                    sortway: params.order, //升序降序
+                    app: selectAppID,
+                    host: selectHost,
+                    type: $('#log-type').val() == null ? -1 : $('#log-type').val(),
+                    from: $('#from-date').val(),
+                    to: $('#to-date').val(),
+                    userName: $("#userName").val(),
+                    keyWord: $("#keyWord").val(),
+                    modTab: $("#modTab").val(),
+
+                };
+                return temp;
+            };
+            return oTableInit;
+        };
+
+
+
+        //创建一个chart.js型chart并初始化之
+        function createAndInitOneChart(motherDiv, chartIDPre, index) {
+            var sonDiv = document.createElement("div");
+            sonDiv.className = 'col-xs-6 col-sm-6 col-md-3 col-lg-3 chartDivCss';
+            var chartID = chartIDPre + index;
+            sonDiv.innerHTML = '<canvas id="' + chartID + '"></canvas>';
+            motherDiv.appendChild(sonDiv);
+            return chartID;
+        }
+
+        //显示分类汇总饼图
+        function createPieCharts(serverDatas) {
+            var motherDiv = document.getElementById('pieChartsDiv');
+            $(motherDiv).empty();
+            var chartIDPre = 'logTracePieChart';
+
+            for (var i = 0; i < serverDatas.length; i++) {
+                var charID =  createAndInitOneChart(motherDiv, chartIDPre, i);
+
+                var curServerData = serverDatas[i];
+                var curCols = new Array();
+                for (var m = 0; m < curServerData.Name.length; m++) {
+                    curCols.push(GetOneColor(m));
+                }
+                var ctx = document.getElementById(charID).getContext("2d");
+                var config = {
+                    type: 'pie',
+                    data: {
+                        datasets: [{
+                            data: curServerData.Data,
+                            backgroundColor: curCols,
+                            label: curServerData.Title
+                        }],
+                        labels: curServerData.Name
+                    },
+                    options: {
+                        responsive: true,
+                        title: { display: true, text: curServerData.Title },
+                        animation: {
+                            animateRotate: true,
+                            animateScale: false
+                        }
+                    }
+                };
+
+                new Chart(ctx, config);
+            }
+
+
+
+
+
+        }
+
+
+    </script>
+
+
+}
+
+
+
+

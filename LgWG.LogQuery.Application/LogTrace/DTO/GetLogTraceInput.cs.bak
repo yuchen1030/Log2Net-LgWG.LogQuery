@@ -1,0 +1,24 @@
+﻿using AconOA.LogQuery.DTO;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using AconOA.LogStash.Common;
+
+namespace AconOA.LogQuery.LogTrace.DTO
+{
+    public class GetLogTraceInput : LogSearchInput<Log_OperateTrace>
+    {
+        public LogBasicClass.LogType LogType { get; set; }
+        public string UserName { get; set; }
+        public string ModuTable { get; set; }
+
+        public string KeyWord { get; set; }
+        public GetLogTraceInput()
+        {
+            Express = a => a.Time.Year >= 2018;
+        }
+
+    }
+}

@@ -1,0 +1,137 @@
+﻿@model LgWG.LogQuery.Web.Models.Layout.SideBarUserAreaViewModel
+
+
+<!-- Messages: style can be found in dropdown.less-->
+<li class="dropdown messages-menu">
+    <!-- Menu toggle button -->
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <i class="fa fa-envelope-o"></i>
+        <span id="mailNotifyNumTxt" class="label label-warning dotNumberLabel">0</span>
+    </a>
+
+    <ul class="dropdown-menu">
+        <li class="header" id="warnHead" ><h4>系统告警信息提示</h4></li>
+        <li>
+            <ul class="menu"  id="mailNotifyDetail">
+
+            </ul>
+        </li>
+
+        <li class="footer dtp-btn-clear" ><a href="#" id="mailClearBtn" style="font-size:15px; font-weight:600">全部标记为已读（清除）</a></li>
+
+
+    </ul>
+</li><!-- /.messages-menu -->
+<!-- Notifications Menu ，暂时隐藏-->
+<li class="dropdown notifications-menu" style="display:none">
+    <!-- Menu toggle button -->
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <i class="fa fa-bell-o"></i>
+        <span class="label label-success dotNumberLabel">10</span>
+    </a>
+    <ul class="dropdown-menu">
+        <li class="header">You have 10 notifications</li>
+        <li>
+            <!-- Inner Menu: contains the notifications -->
+            <ul class="menu">
+                <li>
+                    <!-- start notification -->
+                    <a href="#">
+                        <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                    </a>
+                </li><!-- end notification -->
+            </ul>
+        </li>
+        <li class="footer"><a href="#">View all</a></li>
+    </ul>
+</li>
+<!-- Tasks Menu ，暂时隐藏 -->
+<li class="dropdown tasks-menu" style="display:none">
+    <!-- Menu Toggle Button -->
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <i class="fa fa-flag-o"></i>
+        <span class="label label-danger dotNumberLabel">1</span>
+    </a>
+    <ul class="dropdown-menu">
+        <li class="header">您的任务进度</li>
+        <li>
+            <!-- Inner menu: contains the tasks -->
+            <ul class="menu">
+                <li>
+                    <!-- Task item -->
+                    <a href="#">
+                        <!-- Task title and progress text -->
+                        <h3>
+                            任务进度
+                            <small class="pull-right">90%</small>
+                        </h3>
+                        <!-- The progress bar -->
+                        <div class="progress xs">
+                            <!-- Change the css width attribute to simulate progress -->
+                            <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
+                                <span class="sr-only">已完成90%</span>
+                            </div>
+                        </div>
+                    </a>
+                </li><!-- end task item -->
+            </ul>
+        </li>
+        <li class="footer">
+            <a href="#">View all tasks</a>
+        </li>
+    </ul>
+</li>
+
+<!-- User Account Menu -->
+<li class="dropdown user user-menu" style="padding:0 15px">
+    <!-- Menu Toggle Button -->
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <!-- The user image in the navbar-->
+
+        <img src="@Url.Content("/images/user3.png")" class="user-image" alt="User Image" style="width:25px;height:25px;">
+        <!-- hidden-xs hides the username on small devices so only the image appears. -->
+        <span class="hidden-xs">@Html.Raw(Model.GetShownLoginName())</span>
+    </a>
+    <ul class="dropdown-menu userDivDropdown">
+        <!-- The user image in the menu -->
+        <li class="user-header">
+            <img src="@Url.Content("/images/user3.png")" class="img-circle" alt="User Image" style="width:125px;height:125px; padding:10px">
+            <p>
+                @Html.Raw(Model.GetShownLoginName())
+                <small style="display:none">用户所属角色组</small>
+            </p>
+        </li>
+        <!-- Menu Body -->
+        <li class="user-body">
+
+            <div class="col-xs-12 text-center">
+                <a href="#">跟其他用户沟通</a>
+            </div>
+
+        </li>
+        <!-- Menu Footer-->
+        <li class="user-footer">
+            <div class="pull-left">
+                <a href="#" class="btn btn-default btn-flat">个人信息</a>
+            </div>
+            <div class="pull-right">
+                <a href="@Url.Action("Logout", "Account", new { Area=""})" class="btn btn-default btn-flat">退出</a>
+            </div>
+        </li>
+    </ul>
+</li>
+
+
+@*<li style="margin-top:24px;margin-right:1px;padding-right:1px">
+        <i class="material-icons">people</i>
+        <ul class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@Html.Raw(Model.GetShownLoginName())</ul>
+    </li>
+
+    <li class="dropdown" style="margin-top:21px;margin-left:1px;padding-left:1px">
+        <ul style="margin-left:1px;padding-left:1px" class="material-icons " data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</ul>
+        <ul class="dropdown-menu ">
+            <li><a href="@Url.Action("Logout", "Account")"><i class="material-icons">input</i>@L("Logout")</a></li>
+        </ul>
+    </li>*@
+
+
