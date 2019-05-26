@@ -30,3 +30,5 @@ LgWG.LogQuery为日志查询网站，它查询日志数据库的数据(Log2Net�
 
 ![](https://github.com/yuchen1030/Log2Net-LgWG.LogQuery/blob/master/LgWG.LogQuery.Web/images/DocImg/logMonitorImg.jpg)
 
+上图中，每台服务器显示一条曲线图。因为本人测试的服务器只有一台，所以只有一个曲线图。随着服务器个数的增加，自动添加曲线图的个数。
+
