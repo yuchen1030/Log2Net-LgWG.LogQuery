@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace LgWG.LogQuery.LogTrace
 {
+    /// <summary>
+    /// 轨迹日志接口
+    /// </summary>
     public interface ILog_OperateTraceService : IApplicationService
     {
         /// <summary>

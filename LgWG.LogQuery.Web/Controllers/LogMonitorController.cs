@@ -29,7 +29,7 @@ namespace LgWG.LogQuery.Web.Controllers
         private readonly IRoleAppService _roleAppService;
         private readonly IUserAppService _userAppService;
 
-        public LogMonitorController(ILog_OperateTraceService logTraceService, ILog_SystemMonitorService logMonitorService, IRoleAppService roleAppService, IUserAppService userAppService)
+        public LogMonitorController(ILog_OperateTraceService logTraceService, ILog_SystemMonitorService logMonitorService, IRoleAppService roleAppService, IUserAppService userAppService) : base(userAppService)
         {
             _logTraceService = logTraceService;
             _logMonitorService = logMonitorService;
@@ -39,28 +39,10 @@ namespace LgWG.LogQuery.Web.Controllers
 
         public async Task<ActionResult> Index()
         {
-            var userID = AbpSession.UserId ?? -1;
-            var userIDStr = userID == -1 ? "" : userID.ToString();
-            var userName = "";
-            try
-            {
-                var user = await _userAppService.Get(new EntityDto<long>() { Id = userID });
-                if (user != null)
-                {
-                    userName = user.UserName;
-                }
-            }
-            catch (Exception ex)
-            {
-
-            }
-            Log_OperateTraceBllEdm log = new Log_OperateTraceBllEdm() { UserID = userIDStr, UserName = userName, LogType = LogType.业务记录, TabOrModu = "系统监控", Detail = "进入了页面" };
-            string msg = LogApi.WriteLog(LogLevel.Info, log);
+            LogTraceVM log = new LogTraceVM() { LogType = LogType.业务记录, TabOrModu = "系统监控", Detail = "进入了页面" };
+            string msg = WriteLog(LogLevel.Info, log);
             return View();
         }
-
-        string _speend = "";
-
 
         //获取各个服务器指定范围内的数据，用于曲线显示
         public ActionResult GetMonitorChartData(string range, long userId)

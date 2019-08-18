@@ -29,7 +29,7 @@ namespace LgWG.LogQuery.Web.Controllers
         private readonly ILog_SystemMonitorService _logMonitorService;
         private readonly IUserAppService _userAppService;
 
-        public LogTraceController(ILog_OperateTraceService logTraceService, ILog_SystemMonitorService logMonitorService, IUserAppService userAppService)
+        public LogTraceController(ILog_OperateTraceService logTraceService, ILog_SystemMonitorService logMonitorService, IUserAppService userAppService):base(userAppService)
         {
             _logTraceService = logTraceService;
             _logMonitorService = logMonitorService;
@@ -38,33 +38,17 @@ namespace LgWG.LogQuery.Web.Controllers
 
         public async Task<ActionResult> Index()
         {
-            ViewBag.LogTypeExceptNum = (int)Log2Net.Models.LogType.异常;
-            var userID = AbpSession.UserId ?? -1;
-            var userIDStr = userID == -1 ? "" : userID.ToString();
-            var userName = "";
-            try
-            {
-                var user = await _userAppService.Get(new EntityDto<long>() { Id = userID });
-                if (user != null)
-                {
-                    userName = user.UserName;
-                }
-            }
-            catch (Exception ex)
-            {
-
-            }
             LgWG.LogQuery.Web.Models.IndexView iv = new Models.IndexView();
-            iv.Apps = getApply(DateTime.Now.AddDays(-7).ToString(), DateTime.Now.ToString());
-            Log_OperateTraceBllEdm log = new Log_OperateTraceBllEdm() { UserID = userIDStr, UserName = userName, LogType = LogType.业务记录, TabOrModu = "操作日志", Detail = "进入了页面" };
-            string msg = LogApi.WriteLog(LogLevel.Info, log);
+            iv.Apps = GetApply(DateTime.Now.AddDays(-7).ToString(), DateTime.Now.ToString());
+            LogTraceVM log = new LogTraceVM() { LogType = LogType.业务记录, TabOrModu = "操作日志", Detail = "进入了页面" };
+           string msg = WriteLog(LogLevel.Info, log);
             return View(iv);
         }
 
         //获取服务器列表及其状态概况
         public ActionResult GetAppStatus(string startT, string endT)
         {
-            IList<ApplicationData> result = getApply(startT, endT);
+            IList<ApplicationData> result = GetApply(startT, endT);
             var data = Newtonsoft.Json.JsonConvert.SerializeObject(result);
             return Content(data);
         }
@@ -109,7 +93,6 @@ namespace LgWG.LogQuery.Web.Controllers
         }
 
 
-
         //获取所有的日志类型的下拉列表
         public ActionResult GetAllLogTypeList()
         {
@@ -134,7 +117,7 @@ namespace LgWG.LogQuery.Web.Controllers
         }
 
 
-        List<ApplicationData> getApply(string startT, string endT)
+        List<ApplicationData> GetApply(string startT, string endT)
         {
             var apps = _logMonitorService.GetLatestApplicationGeneral(startT, endT);
             return apps;

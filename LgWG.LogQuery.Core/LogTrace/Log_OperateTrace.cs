@@ -16,12 +16,12 @@ namespace LgWG.LogQuery.LogTrace
         [Column(Order = 1)]
         public DateTime LogTime { get; set; }
 
-        [StringLength(10)]
+        [StringLength(100)]
         public string UserID { get; set; }
 
         [Key]
         [Column(Order = 2)]
-        [StringLength(20)]
+        [StringLength(200)]
         public string UserName { get; set; }
 
         [Key]

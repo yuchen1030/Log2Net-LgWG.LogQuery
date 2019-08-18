@@ -67,12 +67,16 @@ namespace LgWG.LogQuery.Web.Models
         }
     }
 
-       
 
+    public class LogTraceVM
+    {
+        public LogType LogType { get { return _LogType; } set { _LogType = value; } } //日志类型
+        public string TabOrModu { get { return _TabOrModu; } set { _TabOrModu = value; } }//表名或模块名称
+        public string Detail { get; set; } //日志内容
+        public string Remark { get; set; } //其他信息
 
-
-
-
-
+        string _TabOrModu = "启动";
+        LogType _LogType = LogType.业务记录;
+    }
 
 }

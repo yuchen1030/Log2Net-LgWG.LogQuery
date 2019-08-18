@@ -18,8 +18,15 @@ namespace LgWG.LogQuery.Web
             );
 
             base.Application_Start(sender, e);
+            try
+            {
+                Log2Net.LogApi.RegisterLogInitMsg(Log2Net.Models.SysCategory.SysA_01);//日志系统注册
+            }
+            catch (Exception ex)
+            {
 
-            Log2Net.LogApi.RegisterLogInitMsg(Log2Net.Models.SysCategory.SysA_01, Application);//日志系统注册
+            }
+    
 
 
         }
