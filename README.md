@@ -1,6 +1,8 @@
 # Log2Net-LgWG.LogQuery
 LgWG.LogQuery为日志查询网站，它查询日志数据库的数据(Log2Net组件存储的日志数据），显示各服务器/网站的实时数据图表显示，提供操作轨迹数据和监控数据的查询功能，并对异常情况进行告警。
 
+相关博文： https://www.cnblogs.com/yuchen1030/p/10992259.html
+
 本查询网站包括用户管理、日志查询、系统监控等功能，使用ABP框架开发。
 
 1 网站基本功能
@@ -9,7 +11,10 @@ LgWG.LogQuery为日志查询网站，它查询日志数据库的数据(Log2Net�
 
 2 日志查询
 
-日志查询主要用于按照系统名称、服务器名称、时段、日志类型、关键词等条件查询操作轨迹类数据，主要以列表数据的形式展示日志数据。在列表的左侧，可以显示服务器的概况，如cpu使用率，内存使用率等。在列表的上侧，显示日志的分类汇总情况。
+日志查询主要用于按照系统名称、服务器名称、时段、日志类型、关键词等条件查询操作轨迹类数据，主要以列表数据的形式展示日志数据。在列表的左侧，可以显示服务器的概况，如cpu使用率，内存使用率等。在列表的上侧，显示日志的分类汇总情况。如下图所示：
+
+![](https://github.com/yuchen1030/Log2Net-LgWG.LogQuery/blob/master/LgWG.LogQuery.Web/images/DocImg/logTraaceImg.jpg)
+
 
 3 系统监控
 
@@ -22,3 +27,10 @@ LgWG.LogQuery为日志查询网站，它查询日志数据库的数据(Log2Net�
 (3)、系统流量监控：显示系统在某时段内的在线人数、某页面的访问人数等；
 
 (4)、异常告警：在系统新加入监控或失去监控时音乐告警。
+
+如下图所示：
+
+![](https://github.com/yuchen1030/Log2Net-LgWG.LogQuery/blob/master/LgWG.LogQuery.Web/images/DocImg/logMonitorImg.jpg)
+
+上图中，每台服务器显示一条曲线图。因为本人测试的服务器只有一台，所以只有一个曲线图。随着服务器个数的增加，自动添加曲线图的个数。
+
