@@ -1,6 +1,8 @@
 # Log2Net-LgWG.LogQuery
 LgWG.LogQuery为日志查询网站，它查询日志数据库的数据(Log2Net组件存储的日志数据），显示各服务器/网站的实时数据图表显示，提供操作轨迹数据和监控数据的查询功能，并对异常情况进行告警。
 
+本项目代码使用VS2017 .Net4.6.1开发，使用了ABP框架。为方便某些电脑上没有安装VS2017的筒子们使用，代码中包含了发布文件 LgWG.LogQuery_WebRelease_NET461.rar，解压后修改配置后可直接发布。
+
 相关博文： https://www.cnblogs.com/yuchen1030/p/10992259.html
 
 本查询网站包括用户管理、日志查询、系统监控等功能，使用ABP框架开发。
