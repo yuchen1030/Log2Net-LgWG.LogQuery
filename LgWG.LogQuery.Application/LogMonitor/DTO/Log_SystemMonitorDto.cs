@@ -1,10 +1,5 @@
 ﻿using Abp.Application.Services.Dto;
-using Log2Net;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LgWG.LogQuery.LogMonitor.DTO
 {

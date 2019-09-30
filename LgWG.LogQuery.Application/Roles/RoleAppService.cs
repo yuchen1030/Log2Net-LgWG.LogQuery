@@ -9,7 +9,6 @@ using Abp.UI;
 using LgWG.LogQuery.Authorization.Roles;
 using LgWG.LogQuery.Authorization.Users;
 using LgWG.LogQuery.Roles.Dto;
-using Log2Net.Models;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -124,18 +123,18 @@ namespace LgWG.LogQuery.Roles
         }
 
 
-        public List<SysCategory> GetSysCategoryAccordingRoleID()
+        public List<Log2Net.Models.SysCategory> GetSysCategoryAccordingRoleID()
         {
             var sysCateIDs = (from userRole in _userRoleRepository.GetAll()
                               join role in _roleRepository.GetAll() on userRole.RoleId equals role.Id
                               where userRole.UserId == AbpSession.UserId
                               select role.SysCateIDs).FirstOrDefault();
-            List<SysCategory> sysList = new List<Log2Net.Models.SysCategory>();
+            List<Log2Net.Models.SysCategory> sysList = new List<Log2Net.Models.SysCategory>();
             var ids = sysCateIDs.Split(',');
-            if (ids.Contains(((int)(SysCategory.ALL)).ToString()))
+            if (ids.Contains(((int)(Log2Net.Models.SysCategory.ALL)).ToString()))
             {
                 sysList = ComClass.GetMySysCategory();
-                sysList.Remove(SysCategory.ALL);
+                sysList.Remove(Log2Net.Models.SysCategory.ALL);
                 return sysList;
             }
             else

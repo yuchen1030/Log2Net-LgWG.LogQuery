@@ -1,7 +1,4 @@
-﻿using LgWG.LogQuery.Configuration;
-using Log2Net.Models;
-using Log2Net.Util;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -49,7 +46,7 @@ namespace LgWG.LogQuery
         }
 
         //获取本系统中使用的系统枚举
-        public static List<SysCategory> GetMySysCategory()
+        public static List<Log2Net.Models.SysCategory> GetMySysCategory()
         {
             var dic = Log2Net.LogApi.GetLogWebApplicationsName();
             return  dic.Keys.ToList();

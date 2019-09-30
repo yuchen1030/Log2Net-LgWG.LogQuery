@@ -1,9 +1,7 @@
 ﻿using Abp.Domain.Entities;
-using Log2Net.Models;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-//using System.Data.Entity.Spatial;
 
 namespace LgWG.LogQuery.LogTrace
 {
@@ -27,12 +25,12 @@ namespace LgWG.LogQuery.LogTrace
         [Key]
         [Column(Order = 3)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public LogType LogType { get; set; }
+        public Log2Net.Models.LogType LogType { get; set; }
 
         [Key]
         [Column(Order = 4)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public SysCategory SystemID { get; set; }
+        public Log2Net.Models.SysCategory SystemID { get; set; }
 
         [Key]
         [Column(Order = 5)]

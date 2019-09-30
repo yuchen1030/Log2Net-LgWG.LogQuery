@@ -1,21 +1,17 @@
-﻿using LgWG.LogQuery.LogMonitor.DTO;
+﻿using Abp.Application.Services.Dto;
+using Abp.Authorization;
+using Abp.Authorization.Users;
+using Abp.AutoMapper;
+using Abp.Domain.Repositories;
+using Abp.Linq.Extensions;
+using Abp.Runtime.Caching;
+using LgWG.LogQuery.Authorization.Roles;
+using LgWG.LogQuery.LogMonitor.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Abp.Application.Services.Dto;
-using Abp.AutoMapper;
-using Abp.Linq.Extensions;
 using System.Linq.Dynamic.Core;
-using Abp.Authorization;
-using LgWG.LogQuery.Authorization;
-using Abp.Domain.Repositories;
-using Abp.Authorization.Users;
-using LgWG.LogQuery.Authorization.Roles;
 
-using Log2Net;
-using Abp.Runtime.Caching;
-using Log2Net.Models;
-using Log2Net.Util;
 
 namespace LgWG.LogQuery.LogMonitor
 {
@@ -261,7 +257,7 @@ namespace LgWG.LogQuery.LogMonitor
         /// 今日监控日志数量
         /// </summary>
         /// <returns></returns>
-        public int GetTodayMonitorLogNum(List<SysCategory> sysCategoryList)
+        public int GetTodayMonitorLogNum(List<Log2Net.Models.SysCategory> sysCategoryList)
         {
             GetLogMonitorInput input = new GetLogMonitorInput() { SystemID = sysCategoryList, StartT = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd")), EndT = Convert.ToDateTime(DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")) };
             var query = GetLogMonitorIQueryableData(input);
@@ -274,7 +270,7 @@ namespace LgWG.LogQuery.LogMonitor
             var enumList = GetUserSysCategoryAccordingRoleID();
             var query = _logMonitorRepository.GetAll();
             query = query.WhereIf(input.StartT != new DateTime(), a =>  a.LogTime>= input.StartT & a.LogTime < input.EndT);
-            if (!input.SystemID.Contains(SysCategory.ALL))
+            if (!input.SystemID.Contains(Log2Net.Models.SysCategory.ALL))
             {
                 query = query.Where(a => input.SystemID.Contains(a.SystemID));
             }

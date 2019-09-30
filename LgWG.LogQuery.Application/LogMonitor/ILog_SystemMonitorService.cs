@@ -1,15 +1,7 @@
 ﻿using Abp.Application.Services;
 using Abp.Application.Services.Dto;
-using LgWG.LogQuery.BasicRepository;
-using LgWG.LogQuery.DTO;
 using LgWG.LogQuery.LogMonitor.DTO;
-using LgWG.LogQuery.LogTrace.DTO;
-using Log2Net.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 
 namespace LgWG.LogQuery.LogMonitor
@@ -58,7 +50,7 @@ namespace LgWG.LogQuery.LogMonitor
         /// 获取今日监控日志数量
         /// </summary>
         /// <returns></returns>
-        int GetTodayMonitorLogNum(List<SysCategory> sysCategoryList);
+        int GetTodayMonitorLogNum(List<Log2Net.Models.SysCategory> sysCategoryList);
 
     }
 

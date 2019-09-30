@@ -1,6 +1,4 @@
 ﻿using Abp.Domain.Entities;
-using Log2Net;
-using Log2Net.Models;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -16,7 +14,7 @@ namespace LgWG.LogQuery.LogMonitor
         [Key]
         [Column(Order = 2)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public SysCategory SystemID { get; set; }
+        public Log2Net.Models.SysCategory SystemID { get; set; }
 
         [Key]
         [Column(Order = 3)]

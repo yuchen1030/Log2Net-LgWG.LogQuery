@@ -1,22 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Abp.Application.Services;
+﻿using Abp.Application.Services;
 using Abp.Authorization.Users;
 using Abp.Domain.Repositories;
 using Abp.IdentityFramework;
+using Abp.Runtime.Caching;
 using Abp.Runtime.Session;
 using LgWG.LogQuery.Authorization.Roles;
 using LgWG.LogQuery.Authorization.Users;
 using LgWG.LogQuery.MultiTenancy;
-using LgWG.LogQuery.Users;
-using Log2Net;
-using Microsoft.AspNet.Identity;
-
-using System.Linq;
-using Abp.Runtime.Caching;
 using LgWG.LogQuery.Users.Dto;
-using Log2Net.Models;
+using Microsoft.AspNet.Identity;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
 
 namespace LgWG.LogQuery
 {
@@ -85,12 +82,12 @@ namespace LgWG.LogQuery
                               select role.SysCateIDs).FirstOrDefault();
             }
 
-            List<SysCategory> sysList = new List<Log2Net.Models.SysCategory>();
+            List<Log2Net.Models.SysCategory> sysList = new List<Log2Net.Models.SysCategory>();
             var ids = sysCateIDs.Split(',');
-            if (ids.Contains(((int)(SysCategory.ALL)).ToString()))
+            if (ids.Contains(((int)(Log2Net.Models.SysCategory.ALL)).ToString()))
             {
                 sysList = ComClass.GetMySysCategory();
-                sysList.Remove(SysCategory.ALL);
+                sysList.Remove(Log2Net.Models.SysCategory.ALL);
                 return sysList;
             }
             else
