@@ -2528,3 +2528,126 @@ DEBUG 2019-08-29 20:22:56,646 [13   ] Abp.Web.SignalR.Hubs.AbpCommonHub        -
 DEBUG 2019-08-29 20:23:07,789 [41   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is disconnected: 82e2fd5a-6caf-4994-9f75-71e6cd65e2cb
 DEBUG 2019-08-29 20:23:09,909 [13   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is connected: {"ConnectionId":"3d2d7a40-d7b0-4c28-8f6d-837ca2c4d695","IpAddress":"192.168.1.224","TenantId":null,"UserId":1,"ConnectTime":"2019-08-29T20:23:09.9091199+08:00","Properties":{}}
 DEBUG 2019-08-29 20:23:09,947 [44   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is registered: 3d2d7a40-d7b0-4c28-8f6d-837ca2c4d695
+DEBUG 2019-11-23 18:43:40,836 [1    ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2019-11-23 18:43:40,893 [1    ] Abp.Modules.AbpModuleManager             - Found 17 ABP modules in total.
+DEBUG 2019-11-23 18:43:40,903 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: LgWG.LogQuery.Web.LogQueryWebModule, LgWG.LogQuery.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2019-11-23 18:43:40,909 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: LgWG.LogQuery.LogQueryDataModule, LgWG.LogQuery.EntityFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2019-11-23 18:43:40,909 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.EntityFramework.AbpZeroEntityFrameworkModule, Abp.Zero.EntityFramework, Version=3.5.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2019-11-23 18:43:40,910 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCoreModule, Abp.Zero, Version=3.5.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2019-11-23 18:43:40,910 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCommonModule, Abp.Zero.Common, Version=3.5.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2019-11-23 18:43:40,910 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=3.5.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2019-11-23 18:43:40,911 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFramework.AbpEntityFrameworkModule, Abp.EntityFramework, Version=3.5.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2019-11-23 18:43:40,912 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFramework.AbpEntityFrameworkCommonModule, Abp.EntityFramework.Common, Version=3.5.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2019-11-23 18:43:40,912 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: LgWG.LogQuery.LogQueryCoreModule, LgWG.LogQuery.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2019-11-23 18:43:40,912 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: LgWG.LogQuery.LogQueryApplicationModule, LgWG.LogQuery.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2019-11-23 18:43:40,912 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AutoMapper.AbpAutoMapperModule, Abp.AutoMapper, Version=3.5.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2019-11-23 18:43:40,912 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: LgWG.LogQuery.Api.LogQueryWebApiModule, LgWG.LogQuery.WebApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2019-11-23 18:43:40,913 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.WebApi.AbpWebApiModule, Abp.Web.Api, Version=3.5.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2019-11-23 18:43:40,913 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebModule, Abp.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2019-11-23 18:43:40,913 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebCommonModule, Abp.Web.Common, Version=3.5.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2019-11-23 18:43:40,913 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.SignalR.AbpWebSignalRModule, Abp.Web.SignalR, Version=3.5.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2019-11-23 18:43:40,913 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.Mvc.AbpWebMvcModule, Abp.Web.Mvc, Version=3.5.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2019-11-23 18:43:40,917 [1    ] Abp.Modules.AbpModuleManager             - 17 modules loaded.
+DEBUG 2019-11-23 18:43:41,363 [1    ] o.Configuration.LanguageManagementConfig - Converted Abp (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2019-11-23 18:43:41,363 [1    ] o.Configuration.LanguageManagementConfig - Converted AbpZero (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2019-11-23 18:43:41,363 [1    ] o.Configuration.LanguageManagementConfig - Converted LogQuery (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2019-11-23 18:43:41,363 [1    ] o.Configuration.LanguageManagementConfig - Converted AbpWeb (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2019-11-23 18:43:41,782 [1    ] EntityFramework.AbpEntityFrameworkModule - Registering DbContext: LgWG.LogQuery.EntityFramework.LogMonitorContext, LgWG.LogQuery.EntityFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2019-11-23 18:43:41,791 [1    ] EntityFramework.AbpEntityFrameworkModule - Registering DbContext: LgWG.LogQuery.EntityFramework.LogQueryDbContext, LgWG.LogQuery.EntityFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2019-11-23 18:43:41,839 [1    ] EntityFramework.AbpEntityFrameworkModule - Registering DbContext: LgWG.LogQuery.EntityFramework.LogTraceContext, LgWG.LogQuery.EntityFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2019-11-23 18:43:45,801 [1    ] Abp.Localization.LocalizationManager     - Initializing 4 localization sources.
+DEBUG 2019-11-23 18:43:45,915 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2019-11-23 18:43:45,975 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpZero
+DEBUG 2019-11-23 18:43:46,011 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: LogQuery
+DEBUG 2019-11-23 18:43:46,050 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpWeb
+DEBUG 2019-11-23 18:43:46,184 [1    ] Abp.BackgroundJobs.BackgroundJobManager  - Start background worker: Abp.BackgroundJobs.BackgroundJobManager
+DEBUG 2019-11-23 18:43:46,248 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - Found 16 classes define auto mapping attributes
+DEBUG 2019-11-23 18:43:46,248 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - LgWG.LogQuery.Sessions.Dto.TenantLoginInfoDto
+DEBUG 2019-11-23 18:43:46,252 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - LgWG.LogQuery.Sessions.Dto.UserLoginInfoDto
+DEBUG 2019-11-23 18:43:46,252 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - LgWG.LogQuery.Users.Dto.CreateUserDto
+DEBUG 2019-11-23 18:43:46,252 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - LgWG.LogQuery.Users.Dto.UpdateUserDto
+DEBUG 2019-11-23 18:43:46,252 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - LgWG.LogQuery.Users.Dto.UserDto
+DEBUG 2019-11-23 18:43:46,252 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - LgWG.LogQuery.Roles.Dto.CreateRoleDto
+DEBUG 2019-11-23 18:43:46,252 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - LgWG.LogQuery.Roles.Dto.PermissionDto
+DEBUG 2019-11-23 18:43:46,252 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - LgWG.LogQuery.Roles.Dto.RoleDto
+DEBUG 2019-11-23 18:43:46,253 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - LgWG.LogQuery.MultiTenancy.Dto.CreateTenantDto
+DEBUG 2019-11-23 18:43:46,253 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - LgWG.LogQuery.MultiTenancy.Dto.EditTenantDto
+DEBUG 2019-11-23 18:43:46,253 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - LgWG.LogQuery.MultiTenancy.Dto.TenantDto
+DEBUG 2019-11-23 18:43:46,253 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - LgWG.LogQuery.LogMonitor.DTO.ApplicationHost
+DEBUG 2019-11-23 18:43:46,253 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - LgWG.LogQuery.Web.Models.Log_OperateTraceView
+DEBUG 2019-11-23 18:43:46,253 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - LgWG.LogQuery.Web.Models.Log_OperateMonitorView
+DEBUG 2019-11-23 18:43:46,253 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - LgWG.LogQuery.Web.Models.Account.TenantChangeViewModel
+DEBUG 2019-11-23 18:43:46,253 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - LgWG.LogQuery.Web.Models.Account.TenantSelectionViewModel+TenantInfo
+DEBUG 2019-11-23 18:43:48,217 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'LgWG.LogQuery.Sessions.ISessionAppService' with service name 'app/session'.
+DEBUG 2019-11-23 18:43:48,218 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'LgWG.LogQuery.Users.IUserAppService' with service name 'app/user'.
+DEBUG 2019-11-23 18:43:48,219 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'LgWG.LogQuery.Roles.IRoleAppService' with service name 'app/role'.
+DEBUG 2019-11-23 18:43:48,221 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'LgWG.LogQuery.MultiTenancy.ITenantAppService' with service name 'app/tenant'.
+DEBUG 2019-11-23 18:43:48,222 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'LgWG.LogQuery.LogTrace.ILog_OperateTraceService' with service name 'app/log_OperateTraceService'.
+DEBUG 2019-11-23 18:43:48,223 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'LgWG.LogQuery.Configuration.IConfigurationAppService' with service name 'app/configuration'.
+DEBUG 2019-11-23 18:43:48,224 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'LgWG.LogQuery.Authorization.Accounts.IAccountAppService' with service name 'app/account'.
+DEBUG 2019-11-23 18:43:48,225 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'LgWG.LogQuery.LogMonitor.ILog_SystemMonitorService' with service name 'app/log_SystemMonitorService'.
+WARN  2019-11-23 18:43:57,032 [10   ] Abp.Logging.LogHelper                    - Abp.Authorization.AbpAuthorizationException: Current user did not login to the application!
+   at Abp.Authorization.AuthorizationHelper.<AuthorizeAsync>d__19.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Abp.Authorization.AuthorizationHelper.<CheckPermissions>d__22.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Abp.Authorization.AuthorizationHelper.<AuthorizeAsync>d__20.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Nito.AsyncEx.Synchronous.TaskExtensions.WaitAndUnwrapException(Task task)
+   at Nito.AsyncEx.AsyncContext.<>c__DisplayClass15_0.<Run>b__0(Task t)
+   at System.Threading.Tasks.ContinuationTaskFromTask.InnerInvoke()
+   at System.Threading.Tasks.Task.Execute()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Nito.AsyncEx.Synchronous.TaskExtensions.WaitAndUnwrapException(Task task)
+   at Nito.AsyncEx.AsyncContext.Run(Func`1 action)
+   at Abp.Authorization.AuthorizationHelperExtensions.Authorize(IAuthorizationHelper authorizationHelper, MethodInfo methodInfo, Type type)
+   at Abp.Web.Mvc.Authorization.AbpMvcAuthorizeFilter.OnAuthorization(AuthorizationContext filterContext)
+Abp.Authorization.AbpAuthorizationException: Current user did not login to the application!
+   at Abp.Authorization.AuthorizationHelper.<AuthorizeAsync>d__19.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Abp.Authorization.AuthorizationHelper.<CheckPermissions>d__22.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Abp.Authorization.AuthorizationHelper.<AuthorizeAsync>d__20.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Nito.AsyncEx.Synchronous.TaskExtensions.WaitAndUnwrapException(Task task)
+   at Nito.AsyncEx.AsyncContext.<>c__DisplayClass15_0.<Run>b__0(Task t)
+   at System.Threading.Tasks.ContinuationTaskFromTask.InnerInvoke()
+   at System.Threading.Tasks.Task.Execute()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Nito.AsyncEx.Synchronous.TaskExtensions.WaitAndUnwrapException(Task task)
+   at Nito.AsyncEx.AsyncContext.Run(Func`1 action)
+   at Abp.Authorization.AuthorizationHelperExtensions.Authorize(IAuthorizationHelper authorizationHelper, MethodInfo methodInfo, Type type)
+   at Abp.Web.Mvc.Authorization.AbpMvcAuthorizeFilter.OnAuthorization(AuthorizationContext filterContext)
+DEBUG 2019-11-23 18:44:34,486 [12   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is connected: {"ConnectionId":"fe2b08c8-557e-4dd6-ace4-331e1370feb0","IpAddress":"192.168.1.224","TenantId":null,"UserId":1,"ConnectTime":"2019-11-23T18:44:34.4867815+08:00","Properties":{}}
+DEBUG 2019-11-23 18:44:34,548 [10   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is registered: fe2b08c8-557e-4dd6-ace4-331e1370feb0
+DEBUG 2019-11-23 18:46:36,406 [10   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is disconnected: fe2b08c8-557e-4dd6-ace4-331e1370feb0
+DEBUG 2019-11-23 18:46:38,963 [10   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is connected: {"ConnectionId":"2b87223b-fe45-41c8-9371-faa492d0d07c","IpAddress":"192.168.1.224","TenantId":null,"UserId":1,"ConnectTime":"2019-11-23T18:46:38.9636783+08:00","Properties":{}}
+DEBUG 2019-11-23 18:46:38,970 [8    ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is registered: 2b87223b-fe45-41c8-9371-faa492d0d07c
+DEBUG 2019-11-23 18:46:50,286 [12   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is disconnected: 2b87223b-fe45-41c8-9371-faa492d0d07c
+DEBUG 2019-11-23 18:46:51,883 [36   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is connected: {"ConnectionId":"24ac9b4f-79a5-4eff-9f5f-07a32dc6e689","IpAddress":"192.168.1.224","TenantId":null,"UserId":1,"ConnectTime":"2019-11-23T18:46:51.8837292+08:00","Properties":{}}
+DEBUG 2019-11-23 18:46:51,966 [29   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is registered: 24ac9b4f-79a5-4eff-9f5f-07a32dc6e689
+DEBUG 2019-11-23 18:48:12,260 [36   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is disconnected: 24ac9b4f-79a5-4eff-9f5f-07a32dc6e689
+DEBUG 2019-11-23 18:48:13,704 [29   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is connected: {"ConnectionId":"0523f1d1-0ac3-444b-ae21-714e65ee8848","IpAddress":"192.168.1.224","TenantId":null,"UserId":1,"ConnectTime":"2019-11-23T18:48:13.7047064+08:00","Properties":{}}
+DEBUG 2019-11-23 18:48:13,712 [35   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is registered: 0523f1d1-0ac3-444b-ae21-714e65ee8848
+DEBUG 2019-11-23 18:48:58,494 [36   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is disconnected: 0523f1d1-0ac3-444b-ae21-714e65ee8848
+DEBUG 2019-11-23 18:49:00,041 [36   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is connected: {"ConnectionId":"e1163455-fc44-42fb-806b-5f8dca8c37a7","IpAddress":"192.168.1.224","TenantId":null,"UserId":1,"ConnectTime":"2019-11-23T18:49:00.0417632+08:00","Properties":{}}
+DEBUG 2019-11-23 18:49:00,063 [36   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is registered: e1163455-fc44-42fb-806b-5f8dca8c37a7
+DEBUG 2019-11-23 18:49:21,019 [36   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is disconnected: e1163455-fc44-42fb-806b-5f8dca8c37a7
+DEBUG 2019-11-23 18:49:22,252 [65   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is connected: {"ConnectionId":"e574a230-8e49-43ef-a1d5-59f4e42b73ad","IpAddress":"192.168.1.224","TenantId":null,"UserId":1,"ConnectTime":"2019-11-23T18:49:22.2528402+08:00","Properties":{}}
+DEBUG 2019-11-23 18:49:22,276 [36   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is registered: e574a230-8e49-43ef-a1d5-59f4e42b73ad
