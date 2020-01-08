@@ -29,7 +29,7 @@ namespace LgWG.LogQuery.Web.Controllers
         public ActionResult Index()
         {
             LogTraceVM log = new LogTraceVM() { LogType = LogType.业务记录, TabOrModu = "系统监控", Detail = "进入了页面" };
-            string msg = WriteLog(LogLevel.Info, log);
+            //string msg = WriteLog(LogLevel.Info, log);
             var nums = Log2Net.LogApi.GetNumOfOnLineAllVisit();
             return View();
         }

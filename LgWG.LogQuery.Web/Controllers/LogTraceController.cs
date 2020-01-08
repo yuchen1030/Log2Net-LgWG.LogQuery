@@ -29,7 +29,7 @@ namespace LgWG.LogQuery.Web.Controllers
         private readonly ILog_SystemMonitorService _logMonitorService;
         private readonly IUserAppService _userAppService;
 
-        public LogTraceController(ILog_OperateTraceService logTraceService, ILog_SystemMonitorService logMonitorService, IUserAppService userAppService):base(userAppService)
+        public LogTraceController(ILog_OperateTraceService logTraceService, ILog_SystemMonitorService logMonitorService, IUserAppService userAppService) : base(userAppService)
         {
             _logTraceService = logTraceService;
             _logMonitorService = logMonitorService;
@@ -41,7 +41,7 @@ namespace LgWG.LogQuery.Web.Controllers
             LgWG.LogQuery.Web.Models.IndexView iv = new Models.IndexView();
             iv.Apps = GetApply(DateTime.Now.AddDays(-7).ToString(), DateTime.Now.ToString());
             LogTraceVM log = new LogTraceVM() { LogType = LogType.业务记录, TabOrModu = "操作日志", Detail = "进入了页面" };
-           string msg = WriteLog(LogLevel.Info, log);
+            //string msg = WriteLog(LogLevel.Info, log);
             return View(iv);
         }
 
@@ -85,7 +85,7 @@ namespace LgWG.LogQuery.Web.Controllers
             {
 
             }
-        
+
             var resultItems = traces.Items.MapTo<List<Log_OperateTraceView>>();
             var errLogNum = 8;
             var json = AbpJson(new { total = traces.TotalCount, rows = resultItems, ErrLogNum = traces.ErrLogNum, NameDatas = traces.NameDatas }, null, null, JsonRequestBehavior.AllowGet, true, false);
