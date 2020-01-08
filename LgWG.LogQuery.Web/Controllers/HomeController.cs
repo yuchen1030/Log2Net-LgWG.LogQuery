@@ -35,5 +35,10 @@ namespace LgWG.LogQuery.Web.Controllers
         }
 
 
+        public ActionResult Test()
+        {
+            return View();
+        }
+
     }
 }

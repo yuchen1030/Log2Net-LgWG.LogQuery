@@ -1,0 +1,103 @@
+﻿@using System.Web.Optimization
+@{
+    ViewBag.Title = "test";
+    ViewBag.ActiveMenu = PageNames.Home; //The menu item will be active for this page.
+}
+@section styles {
+    <link href="~/lib/morris.js/morris.css" rel="stylesheet" />
+    <link href="/Css/datepicker3.css" rel="stylesheet" type="text/css" />
+    <link href="/Css/bootstrap-dialog.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css">
+    <style>
+        .tableMargin {
+            margin-top: 30px;
+            padding-top: 5px;
+            padding-bottom: -20px;
+        }
+
+        .chartDivCss {
+            border: 1px dotted azure;
+            border-color: burlywood;
+        }
+
+        .clickToShowModalCss {
+            color: indianred;
+            font-size: 15px;
+            cursor: pointer;
+            background-color: transparent; /* 背景色透明 */
+            border: 0px; /* 边框取消 */
+        }
+
+        .splitLineCss {
+            padding-bottom: 10px;
+            border-bottom: 2px solid green
+        }
+    </style>
+
+    
+}
+
+@section scripts{
+    <script src="~/Views/Home/utils.js"></script>
+
+    <script src="~/js/myBootstrapTableDatepicker.js"></script>
+
+
+    @Scripts.Render("~/Bundles/home-index")
+    <script src="~/Views/Home/Index.js?v=20190317"></script>
+
+    <script>
+
+
+        function chevron_toggle() {
+            $("#collapseParent").find("span").toggleClass("glyphicon-chevron-up");
+            $("#collapseParent").find("span").toggleClass("glyphicon-chevron-down");
+        }
+    </script>
+
+}
+<div style="margin-bottom:90px">
+</div>
+
+
+
+
+
+
+<div class="container">
+    <h2>Chevron-left Glyph</h2>
+    <p>Chevron-left icon: <span class="glyphicon glyphicon-chevron-left"></span></p>
+    <p>
+        Chevron-left icon as a link:
+        <a href="#">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+    </p>
+    <p>
+        Chevron-left icon on a button:
+        <button type="button" class="btn btn-default btn-sm">
+            <span class="glyphicon glyphicon-chevron-left"></span> Chevron-left
+        </button>
+    </p>
+    <p>
+        Chevron-left icon on a styled link button:
+        <a href="#" class="btn btn-info btn-lg">
+            <span class="glyphicon glyphicon-chevron-left"></span> Chevron-left
+        </a>
+    </p>
+</div>
+
+
+
+
+<ul class="nav nav-pills nav-stacked nav-divider " style="background-color:red">
+    <li role="presentation" id="bar-1"><a href="bar-1">Bar 1</a></li>
+    <li role="presentation" id="bar-2">
+        <a href="#docCollapse" class="nav-header collapsed" data-toggle="collapse" id="collapseParent" onclick="chevron_toggle()">Bar 2<span class="pull-right glyphicon glyphicon-chevron-down"></span></a>
+        <ul id="docCollapse" class="nav nav-list collapse">
+            <li><a href="#">Child Bar 1</a></li>
+            <li><a href="#">Child Bar 2</a></li>
+        </ul>
+    </li>
+    <li role="presentation" id="bar-3"><a href="bar-3">Bar 3</a></li>
+</ul>
